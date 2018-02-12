@@ -547,7 +547,7 @@ ctx.meta                // Request metadata
 ctx.callerNodeID        // Caller Node ID if it is requested from a remote node.
 ctx.level               // Request level (in case of sub-calls). The first level is 1.
 
-// Make a sub-call Same arguments like broker.call
+// Make a sub-call
 ctx.call(actionName, params, callingOptions)
 
 // Emit an event
