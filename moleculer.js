@@ -291,7 +291,6 @@ const broker = new ServiceBroker({
  * Cacher configuration
  *
  * http://moleculer.services/docs/cachers.html
- *
  * ******************************************************************************************* */
 
 // Memory cacher
@@ -362,7 +361,6 @@ broker.cacher.clean();
  * Serializer configuration
  *
  * http://moleculer.services/docs/serializers.html
- *
  * ******************************************************************************************* */
 
 // JSON serializer (default)
@@ -425,7 +423,6 @@ const broker = new ServiceBroker({
  * Logger configuration
  *
  * http://moleculer.services/docs/logger.html
- *
  * ******************************************************************************************* */
 
 // Logger methods
@@ -530,7 +527,8 @@ module.exports = {
 /* *******************************************************************************************
  * Service properties & methods
  * ******************************************************************************************* */
-this.name               //Name of service
+
+this.name               // Name of service
 this.version            // Version of service
 this.settings           // Settings of service
 this.schema             // Schema definition of service
