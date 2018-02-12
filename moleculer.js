@@ -14,7 +14,7 @@ npm i moleculer
 ```
 
 /* *******************************************************************************************
- * Service Broker options
+ * SERVICE BROKER OPTIONS
  * ******************************************************************************************* */
 
 // All ServiceBroker options with default values
@@ -71,7 +71,7 @@ const broker = new ServiceBroker({
 });
 
 /* *******************************************************************************************
- * Broker properties & methods
+ * SERVICE BROKER METHODS
  * ******************************************************************************************* */
 
 // Broker properties
@@ -112,12 +112,13 @@ broker.MOLECULER_VERSION                        // Version number of Moleculer l
 broker.PROTOCOL_VERSION                         // Version number of Moleculer protocol
 
 /* *******************************************************************************************
- * Broker service calls
+ * BROKER SERVICE CALLS
  * ******************************************************************************************* */
 
 // Call the "users.get" service with params
 broker.call("users.get", { id: 150 }).then(user => console.log(user));
-// or use async/await
+
+// Call with async/await
 const user = await broker.call("users.get", { id: 150});
 
 // Call with calling options
@@ -140,7 +141,7 @@ const res = await broker.mcall({
 console.log(res.posts, res.users);
 
 /* *******************************************************************************************
- * Broker events
+ * BROKER EVENTS
  * ******************************************************************************************* */
 
 // Send a balanced event with payload
@@ -156,8 +157,7 @@ broker.broadcast("user.created", { user: user });
 broker.broadcast("user.created", { user: user }, ["mail", "payment"]);
 
 /* *******************************************************************************************
- * NATS Transporter configuration
- *
+ * NATS TRANSPORTER
  * Requirement: `npm i nats`
  * ******************************************************************************************* */
 
@@ -199,8 +199,7 @@ const broker = new ServiceBroker({
 });
 
 /* *******************************************************************************************
- * Redis Transporter configuration
- *
+ * REDIS TRANSPORTER
  * Requirement: `npm i ioredis`
  * ******************************************************************************************* */
 
@@ -230,8 +229,7 @@ const broker = new ServiceBroker({
 
 
 /* *******************************************************************************************
- * MQTT Transporter configuration
- *
+ * MQTT TRANSPORTER
  * Requirement: `npm i mqtt`
  * ******************************************************************************************* */
 
@@ -259,8 +257,7 @@ const broker = new ServiceBroker({
 });
 
 /* *******************************************************************************************
- * AMQP Transporter configuration
- *
+ * AMQP TRANSPORTER
  * Requirement: `npm i amqplib`
  * ******************************************************************************************* */
 
@@ -288,8 +285,7 @@ const broker = new ServiceBroker({
 
 
 /* *******************************************************************************************
- * Cacher configuration
- *
+ * CACHERS
  * http://moleculer.services/docs/cachers.html
  * ******************************************************************************************* */
 
@@ -358,8 +354,7 @@ broker.cacher.clean("mykey.*");
 broker.cacher.clean();
 
 /* *******************************************************************************************
- * Serializer configuration
- *
+ * SERIALIZER
  * http://moleculer.services/docs/serializers.html
  * ******************************************************************************************* */
 
@@ -384,7 +379,7 @@ const broker = new ServiceBroker({
 });
 
 /* *******************************************************************************************
- * Strategy configuration
+ * STRATEGY
  * ******************************************************************************************* */
 
 // Round-robin strategy (default)
@@ -420,8 +415,7 @@ const broker = new ServiceBroker({
 });
 
 /* *******************************************************************************************
- * Logger configuration
- *
+ * LOGGER
  * http://moleculer.services/docs/logger.html
  * ******************************************************************************************* */
 
@@ -454,7 +448,7 @@ const broker = new ServiceBroker({
 });
 
 /* *******************************************************************************************
- * Service schema
+ * SERVICE SCHEMA
  * ******************************************************************************************* */
 
 module.exports = {
@@ -525,7 +519,7 @@ module.exports = {
 };
 
 /* *******************************************************************************************
- * Service properties & methods
+ * SERVICE
  * ******************************************************************************************* */
 
 this.name               // Name of service
@@ -539,7 +533,7 @@ this.actions            // Actions of service.
 this.waitForServices    // Pointer to ‘broker.waitForServices’ method
 
 /* *******************************************************************************************
- * Context properties & methods
+ * CONTEXT
  * ******************************************************************************************* */
 
 ctx.id                  // Context ID
