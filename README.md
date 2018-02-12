@@ -1,4 +1,4 @@
-![Moleculer logo](docs/assets/logo.png)
+![Moleculer logo](http://moleculer.services/images/banner.png)
 
 # Moleculer Cheatsheets
 Official cheatsheets for Moleculer microservices framework.
