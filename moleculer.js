@@ -37,6 +37,7 @@ const broker = new ServiceBroker({
 
     registry: {                             // Service Registry options
         strategy: "RoundRobin",             // Invocation strategy
+        strategyOptions: null,              // Strategy options
         preferLocal: true                   // Prefer local invocations
     },
 
@@ -65,6 +66,8 @@ const broker = new ServiceBroker({
     hotReload: false,                       // Hot-reload  services
 
     middlewares: null,                      // List of middlewares
+
+    replCommands: null,                     // Custom REPL commands
 
     ServiceFactory: null,                   // Custom Service factory class
     ContextFactory: null                    // Custom Context factory class
@@ -95,8 +98,15 @@ broker.loadServices(folder, fileMask);          // Load all services from direct
 broker.loadService(filePath);                   // Load a service from a file
 broker.createService(schema, schemaMods);       // Create a local service from schema
 broker.destroyService(service);                 // Destroy a local service
-broker.getLocalService(name);                   // Get a local service instance by name
-broker.waitForServices(serviceNames, timeout, interval);    // Wait for services. Returns a Promise
+broker.getLocalService(name, version);          // Get a local service instance by name
+
+// Wait for services. Returns a Promise
+await broker.waitForServices(serviceNames, timeout, interval);
+await broker.waitForServices(["posts", "users"], 5000);
+await broker.waitForServices({
+    name: "posts", version: 2,
+    name: "users", version: 1
+}, 5000);
 
 broker.use(...middlewares);                     // Register middlewares
 
@@ -283,6 +293,151 @@ const broker = new ServiceBroker({
     }
 });
 
+/* *******************************************************************************************
+ * KAFKA TRANSPORTER
+ * Requirement: `npm i kafka-node`
+ * ******************************************************************************************* */
+
+// Default options
+const broker = new ServiceBroker({
+    transporter: "Kafka"
+});
+
+// With URI
+const broker = new ServiceBroker({
+    transporter: "kafka://192.168.51.29:2181"
+});
+
+// With options
+const broker = new ServiceBroker({
+    transporter: {
+        type: "kafka",
+        options: {
+            host: "192.168.51.29:2181",
+
+            // KafkaClient options. More info: https://github.com/SOHU-Co/kafka-node#clientconnectionstring-clientid-zkoptions-noackbatchoptions-ssloptions
+            client: {
+                zkOptions: undefined,
+                noAckBatchOptions: undefined,
+                sslOptions: undefined
+            },
+
+            // KafkaProducer options. More info: https://github.com/SOHU-Co/kafka-node#producerclient-options-custompartitioner
+            producer: {},
+            customPartitioner: undefined,
+
+            // ConsumerGroup options. More info: https://github.com/SOHU-Co/kafka-node#consumergroupoptions-topics
+            consumer: {
+            },
+
+            // Advanced options for `send`. More info: https://github.com/SOHU-Co/kafka-node#sendpayloads-cb
+            publish: {
+                partition: 0,
+                attributes: 0
+            }
+        }
+    }
+});
+
+/* *******************************************************************************************
+ * NATS STREAMING TRANSPORTER
+ * Requirement: `npm i node-nats-streaming`
+ * ******************************************************************************************* */
+
+// Default options
+const broker = new ServiceBroker({
+    transporter: "STAN"
+});
+
+// With URI
+const broker = new ServiceBroker({
+    transporter: "stan://192.168.0.120:4222"
+});
+
+// With options
+const broker = new ServiceBroker({
+    transporter: {
+        type: "STAN",
+        options: {
+            url: "stan://127.0.0.1:4222",
+            clusterID: "my-cluster"
+        }
+    }
+});
+
+/* *******************************************************************************************
+ * TCP STREAMING TRANSPORTER
+ * No requirements
+ * ******************************************************************************************* */
+
+// Default options
+const broker = new ServiceBroker({
+    transporter: "TCP"
+});
+
+// With static node list
+const broker = new ServiceBroker({
+    transporter: "tcp://172.17.0.1:6000/node-1,172.17.0.2:6000/node-2"
+});
+
+const broker = new ServiceBroker({
+    nodeID: "node-1",
+    transporter: {
+        type: "TCP",
+        options: {
+            udpDiscovery: false,
+            urls: [
+                "172.17.0.1:6000/node-1",
+                "172.17.0.2:6000/node-2",
+                "172.17.0.3:6000/node-3"
+            ]
+        }
+    }
+});
+
+// With full options
+const broker = new ServiceBroker({
+    logger: true,
+    transporter: {
+        type: "TCP",
+        options: {
+            // Enable UDP discovery
+            udpDiscovery: true,
+            // Reusing UDP server socket
+            udpReuseAddr: true,
+
+            // UDP port
+            udpPort: 4445,
+            // UDP bind address
+            udpBindAddress: null,
+            // UDP sending period
+            udpPeriod: 5,
+
+            // Multicast address.
+            udpMulticast: "239.0.0.0",
+            // Multicast TTL setting
+            udpMulticastTTL: 1,
+
+            // Send broadcast
+            udpBroadcast: false,
+
+            // TCP server port. Null or 0 means random port
+            port: null,
+            // Static remote nodes address list (when UDP discovery is not available)
+            urls: null,
+            // Use hostname as preffered connection address
+            useHostname: true,
+
+            // Gossip sending period in seconds
+            gossipPeriod: 2,
+            // Maximum enabled outgoing connections. If reach, close the old connections
+            maxConnections: 32,
+            // Maximum TCP packet size
+            maxPacketSize: 1 * 1024 * 1024
+        }
+    }
+});
+
 
 /* *******************************************************************************************
  * CACHERS
@@ -455,7 +610,7 @@ module.exports = {
     // Name
 	name: "greeter",
     // Version
-    version: "v2",
+    version: 2,
 
     // Settings
 	settings: {},
