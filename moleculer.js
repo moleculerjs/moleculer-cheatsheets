@@ -608,69 +608,69 @@ const broker = new ServiceBroker({
 
 module.exports = {
     // Name
-	name: "greeter",
+    name: "greeter",
     // Version
     version: 2,
 
     // Settings
-	settings: {},
+    settings: {},
     // Metadata
-	metadata: {},
+    metadata: {},
     // Dependencies
-	dependencies: [],
+    dependencies: [],
 
     // Actions
-	actions: {
+    actions: {
         // Shorthand actions
-		hello() {
+        hello() {
             // Call a method
             this.doSomething();
 
-			return "Hello Moleculer";
-		},
+            return "Hello Moleculer";
+        },
 
         // With properties
-		welcome: {
+        welcome: {
             // Cache options
             cache: {
                 keys: ["name"]
             },
             // Validation options
-			params: {
-				name: "string"
-			},
+            params: {
+                name: "string"
+            },
             // Action handler
-			handler(ctx) {
-				return `Welcome, ${ctx.params.name}`;
-			}
-		}
-	},
+            handler(ctx) {
+                return `Welcome, ${ctx.params.name}`;
+            }
+        }
+    },
 
-	events: {
+    events: {
         "user.created"(payload, sender) {
 
         }
-	},
+    },
 
     // Service methods
-	methods: {
+    methods: {
         doSomething() {}
-	},
+    },
 
     // Lifecycle event handlers
-	created() {
+    created() {
         console.log("Service created");
-	},
+    },
 
-	started() {
+    started() {
         console.log("Service started");
         return Promise.resolve();
-	},
+    },
 
-	stopped() {
+    stopped() {
         console.log("Service stopped");
         return Promise.resolve();
-	}
+    }
 };
 
 /* *******************************************************************************************
