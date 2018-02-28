@@ -1,6 +1,6 @@
 /* *******************************************************************************************
  * MOLECULER DB CHEATSHEET
- * https://github.com/ice-services/moleculer-db/tree/master/packages/moleculer-db#readme
+ * https://github.com/moleculerjs/moleculer-db/tree/master/packages/moleculer-db#readme
  *
  * Version: 0.6.x
  * ******************************************************************************************* */
