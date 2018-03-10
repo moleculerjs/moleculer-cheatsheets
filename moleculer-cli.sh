@@ -1,6 +1,6 @@
 ############################################################################################
 # MOLECULER CLI CHEATSHEET
-# http://moleculer.services/docs/moleculer-cli.html
+# http://moleculer.services/0.12/docs/moleculer-cli.html
 #
 # Version: 0.4.x
 ############################################################################################

@@ -1,6 +1,6 @@
 ############################################################################################
 # MOLECULER REPL CHEATSHEET
-# http://moleculer.services/docs/moleculer-repl.html
+# http://moleculer.services/0.12/docs/moleculer-repl.html
 #
 # Version: 0.3.x
 ############################################################################################

@@ -1,6 +1,6 @@
 /* *******************************************************************************************
  * MOLECULER WEB CHEATSHEET
- * http://moleculer.services/docs/moleculer-web.html
+ * http://moleculer.services/0.12/docs/moleculer-web.html
  *
  * Version: 0.6.x
  * ******************************************************************************************* */

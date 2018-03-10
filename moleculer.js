@@ -1,6 +1,6 @@
 /* *******************************************************************************************
- * MOLECULER CORE CHEATSHEET
- * http://moleculer.services/docs/
+ * MOLECULER MICROSERVICES FRAMEWORK - CORE CHEATSHEET
+ * http://moleculer.services/0.12/docs/
  *
  * Version: 0.12.x
  * ******************************************************************************************* */
